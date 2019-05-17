@@ -10,7 +10,11 @@ int main(void) {
     hwlib::wait_ms(1000);
 
     r2d2::comm_c comm;
-    auto module = r2d2::end_effectors::module_c(comm);
+
+    //no access to any end effector yet, using nullptr for the time being
+    auto end_effector = nullptr;
+
+    auto module = r2d2::end_effectors::module_c(comm, end_effector);
 
     for(;;) {
         module.process();

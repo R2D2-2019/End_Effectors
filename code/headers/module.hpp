@@ -1,18 +1,31 @@
 #pragma once
 
 #include <base_module.hpp>
+#include <end_effector.hpp>
 
 namespace r2d2::end_effectors {
+
+    /**
+     * This class is the interface for the end_effector module.
+     * It handles incoming frames and commands the end effector to do stuff.
+     * It has a pointer to the base end_effector class.
+     */
     class module_c : public base_module_c {
+    private:
+        end_effector_c *end_effector;
     public:
         /**
+         * The constructor initializes:
+         * base_module_c
+         * the pointer to the end_effector
+         * 
          * @param comm 
+         * @param end_effector
          */
-        module_c(base_comm_c &comm)
-            : base_module_c(comm) {
+        module_c(base_comm_c &comm, end_effector_c *end_effector)
+            : base_module_c(comm), end_effector(end_effector) {
             comm.listen_for_frames(
-                {frame_type::ALL}
-
+                { frame_type::ALL }
             );
         }
     
