@@ -1,6 +1,6 @@
 #include "hwlib.hpp"
 #include <pwm.hpp>
-#include "claw_c.hpp"
+#include "claw.hpp"
 
 int main(void) {
     // kill the watchdog

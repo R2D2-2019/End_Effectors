@@ -1,4 +1,4 @@
-#include "claw_c.hpp"
+#include "claw.hpp"
 
 namespace r2d2::end_effectors {
     claw_c::claw_c(uint8_t pot_pin_number, uint8_t pwm_pin_number)
