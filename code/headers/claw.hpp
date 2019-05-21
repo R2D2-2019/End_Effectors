@@ -13,7 +13,7 @@ namespace r2d2::end_effectors {
         void close();
         virtual void reset() override;
     private:
-        int32_t calc_pot_difference();
+        int32_t calc_pot_difference(uint8_t current_pwm);
         hwlib::target::pin_adc pot;
         R2D2::pwm_lib::pwm_c pwm;
         const uint16_t pot_offset = 1250;
