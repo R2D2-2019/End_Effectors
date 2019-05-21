@@ -16,10 +16,10 @@ namespace r2d2::end_effectors {
         int32_t calc_pot_difference(uint8_t current_pwm);
         hwlib::target::pin_adc pot;
         R2D2::pwm_lib::pwm_c pwm;
-        const uint16_t pot_offset = 1250;
-        const uint8_t pot_per_pwm_step = 132;
-        const uint8_t pot_scans = 50;
-        const uint8_t open_pwm = 13;
-        const uint8_t closed_pwm = 33;
+        constexpr uint16_t pot_offset = 1250;
+        constexpr uint8_t pot_per_pwm_step = 132;
+        constexpr uint8_t pot_scans = 50;
+        constexpr uint8_t open_pwm = 13;
+        constexpr uint8_t closed_pwm = 33;
     };
 }
