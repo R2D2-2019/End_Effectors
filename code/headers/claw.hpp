@@ -2,13 +2,16 @@
 
 #include <hwlib.hpp>
 #include <pwm.hpp>
+#include "end_effector.hpp"
 
 namespace r2d2::end_effectors {
-    class claw_c {
+    class claw_c : public end_effector_c {
     public:
-        claw_c(uint8_t pot_pin_number = 0, uint8_t pwm_pin_number = 0);
+        claw_c(hwlib::target::pin_adc pot_pin = hwlib::target::pin_adc(hwlib::target::ad_pins::a0),
+         R2D2::pwm_lib::pwm_c pwm_pin = R2D2::pwm_lib::pwm_c(0));
         void open();
         void close();
+        virtual void reset() override;
     private:
         hwlib::target::pin_adc pot;
         R2D2::pwm_lib::pwm_c pwm;

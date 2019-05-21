@@ -1,16 +1,16 @@
 #include "claw.hpp"
 
 namespace r2d2::end_effectors {
-    claw_c::claw_c(uint8_t pot_pin_number, uint8_t pwm_pin_number)
-    : pot(hwlib::target::pin_adc(hwlib::target::ad_pins::a0)),
-    pwm(R2D2::pwm_lib::pwm_c(0)) {
-        open();
+    claw_c::claw_c(hwlib::target::pin_adc pot_pin, R2D2::pwm_lib::pwm_c pwm_pin)
+    : pot(pot_pin),
+    pwm(pwm_pin) {
+        type = end_effector_type::CLAW;
     }
     
     void claw_c::open() {
         pwm.change_duty_cycle(open_pwm);
     }
-
+    
     void claw_c::close() {
         uint32_t pot_value;
         uint32_t expected_pot;
@@ -36,5 +36,9 @@ namespace r2d2::end_effectors {
                 }
             }
         }
+    }
+
+    void claw_c::reset() {
+        open();
     }
 }
