@@ -2,7 +2,7 @@
 
 #include <hwlib.hpp>
 #include <pwm.hpp>
-#include "end_effector.hpp"
+#include <end_effector.hpp>
 
 namespace r2d2::end_effectors {
     class claw_c : public end_effector_c {
