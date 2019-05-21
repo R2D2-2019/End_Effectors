@@ -14,7 +14,7 @@ namespace r2d2::end_effectors {
      * It is used by the interface as a listener
      */
     class end_effector_c {
-    private:
+    protected:
         end_effector_type type;
     public:
         /**

@@ -8,7 +8,7 @@ namespace r2d2::end_effectors {
     }
     
     void claw_c::open() {
-        pwm.change_duty_cycle(open_pwm);
+        pwm.set_duty_cycle(open_pwm);
     }
     
     int32_t claw_c::calc_pot_difference() {
@@ -33,7 +33,7 @@ namespace r2d2::end_effectors {
         hwlib::wait_ms(1000);
         for(uint8_t i = open_pwm; i <= closed_pwm; i++) {
             if(!collision) {
-                pwm.change_duty_cycle(i);
+                pwm.set_duty_cycle(i);
                 hwlib::wait_ms(20);
                 difference = calc_pot_difference();
                 if(difference > 100 || difference < -100) {
