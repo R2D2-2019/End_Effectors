@@ -34,7 +34,7 @@ namespace r2d2::end_effectors {
         for(uint8_t current_pwm = open_pwm; current_pwm <= closed_pwm; current_pwm++) {
             if(!collision) {
                 pwm.set_duty_cycle(current_pwm);
-                hwlib::wait_ms(20);
+                hwlib::wait_ms(80);
                 difference = calc_pot_difference(current_pwm);
                 if(difference > 100 || difference < -100) {
                     collision = true;
