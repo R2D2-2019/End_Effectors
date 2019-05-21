@@ -1,4 +1,4 @@
-#include "claw.hpp"
+#include <claw.hpp>
 
 namespace r2d2::end_effectors {
     claw_c::claw_c(hwlib::target::pin_adc pot_pin, R2D2::pwm_lib::pwm_c pwm_pin)
