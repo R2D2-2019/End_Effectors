@@ -22,12 +22,7 @@ namespace r2d2::end_effectors {
          * @param comm 
          * @param end_effector
          */
-        module_c(base_comm_c &comm, end_effector_c *end_effector)
-            : base_module_c(comm), end_effector(end_effector) {
-            comm.listen_for_frames(
-                { frame_type::ALL }
-            );
-        }
+        module_c(base_comm_c &comm, end_effector_c *end_effector);
     
         /**
          * Let the module process data.
