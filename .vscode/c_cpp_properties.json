@@ -4,7 +4,10 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${workspaceFolder}/../../libraries/datastructures/code/headers",
                 "${workspaceFolder}/../../libraries/hwlib/library",
+                "${workspaceFolder}/../../libraries/internal_communication/code/headers",
+                "${workspaceFolder}/../../libraries/PWM_library/code/headers",
                 "${workspaceFolder}/../../programs/bmptk/targets/cortex/atmel",
                 "${workspaceFolder}/code/headers"
             ],
