@@ -9,13 +9,24 @@ namespace r2d2::end_effectors {
     public:
         claw_c(hwlib::target::pin_adc pot_pin = hwlib::target::pin_adc(hwlib::target::ad_pins::a0),
          R2D2::pwm_lib::pwm_c pwm_pin = R2D2::pwm_lib::pwm_c(0));
-        void open();
-        void close();
-        virtual void reset() override;
+         
+        void open_claw();
+
+        void close_claw();
+
+        void reset() override;
+
+        void process(base_comm_c &comm) override;
+
+        void set_listen_frame_types(base_comm_c &comm) override;
+
     private:
         int32_t calc_pot_difference(uint8_t current_pwm);
+
         hwlib::target::pin_adc pot;
+
         R2D2::pwm_lib::pwm_c pwm;
+
         constexpr static uint16_t pot_offset = 1250;
         constexpr static uint8_t pot_per_pwm_step = 132;
         constexpr static uint8_t pot_scans = 50;

@@ -2,12 +2,11 @@
 
 namespace r2d2::end_effectors {
     claw_c::claw_c(hwlib::target::pin_adc pot_pin, R2D2::pwm_lib::pwm_c pwm_pin)
-    : pot(pot_pin),
-    pwm(pwm_pin) {
+    : pot(pot_pin), pwm(pwm_pin) {
         type = end_effector_type::CLAW;
     }
     
-    void claw_c::open() {
+    void claw_c::open_claw() {
         pwm.set_duty_cycle(open_pwm);
     }
     
@@ -26,10 +25,10 @@ namespace r2d2::end_effectors {
         return difference;
     }
 
-    void claw_c::close() {
+    void claw_c::close_claw() {
         bool collision = false;
         int32_t difference;
-        open();
+        open_claw();
         hwlib::wait_ms(1000);
         for(uint8_t current_pwm = open_pwm; current_pwm <= closed_pwm; current_pwm++) {
             if(!collision) {
@@ -44,6 +43,33 @@ namespace r2d2::end_effectors {
     }
 
     void claw_c::reset() {
-        open();
+        open_claw();
+    }
+
+    void claw_c::process(base_comm_c &comm) {
+        while (comm.has_data()) {
+            auto frame = comm.get_data();
+
+            if (frame.request) {
+                continue;
+            }
+
+            const auto close = frame.as_frame_type<
+                frame_type::END_EFFECTOR_CLAW
+            >().close;
+
+            if (close) {
+                close_claw();
+            } else {
+                open_claw();
+            }
+        }
+    }
+
+    void claw_c::set_listen_frame_types(base_comm_c &comm) {
+        comm.listen_for_frames(
+            //TODO add claw frame type
+            { frame_type::END_EFFECTOR_CLAW }
+        );
     }
 }
