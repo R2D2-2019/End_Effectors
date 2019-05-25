@@ -1,5 +1,7 @@
 #pragma once
 
+#include <base_module.hpp>
+
 namespace r2d2::end_effectors {
 
     /**
@@ -23,9 +25,23 @@ namespace r2d2::end_effectors {
         virtual void reset() = 0;
 
         /**
+         * This function is used to process incoming frames
+         * 
+         * @param comm the comm used by the module
+         */
+        virtual void process(base_comm_c &comm) = 0;
+
+        /**
+         *  This function is called on initialization and should be used to set wich frames to listen to
+         * 
+         * @param comm the comm used by the module
+         */
+        virtual void set_listen_frame_types(base_comm_c &comm) = 0;
+
+        /**
          * This function returns the type of the end effector
          * 
-         * @return
+         * @return the type of this end effector
          */
         end_effector_type get_type() const {
             return type;
