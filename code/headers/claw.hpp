@@ -8,7 +8,7 @@ namespace r2d2::end_effectors {
     class claw_c : public end_effector_c {
     public:
         claw_c(hwlib::target::pin_adc pot_pin = hwlib::target::pin_adc(hwlib::target::ad_pins::a0),
-         R2D2::pwm_lib::pwm_c pwm_pin = R2D2::pwm_lib::pwm_c(0));
+         r2d2::pwm_lib::pwm_c pwm_pin = r2d2::pwm_lib::pwm_c(0));
          
         void open_claw();
 
@@ -25,7 +25,7 @@ namespace r2d2::end_effectors {
 
         hwlib::target::pin_adc pot;
 
-        R2D2::pwm_lib::pwm_c pwm;
+        r2d2::pwm_lib::pwm_c pwm;
 
         constexpr static uint16_t pot_offset = 1250;
         constexpr static uint8_t pot_per_pwm_step = 132;
