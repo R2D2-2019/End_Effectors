@@ -1,7 +1,7 @@
 #include <claw.hpp>
 
 namespace r2d2::end_effectors {
-    claw_c::claw_c(hwlib::target::pin_adc pot_pin, R2D2::pwm_lib::pwm_c pwm_pin)
+    claw_c::claw_c(hwlib::target::pin_adc pot_pin, r2d2::pwm_lib::pwm_c pwm_pin)
     : pot(pot_pin), pwm(pwm_pin) {
         type = end_effector_type::CLAW;
     }
@@ -51,6 +51,12 @@ namespace r2d2::end_effectors {
             auto frame = comm.get_data();
 
             if (frame.request) {
+                if (frame.type != frame_type::END_EFFECTOR_TYPE) {
+                    continue;
+                }
+                frame_end_effector_type_s ee_type;
+                ee_type.type = end_effector_type::CLAW;
+                comm.send(ee_type);
                 continue;
             }
 
@@ -68,7 +74,6 @@ namespace r2d2::end_effectors {
 
     void claw_c::set_listen_frame_types(base_comm_c &comm) {
         comm.listen_for_frames(
-            //TODO add claw frame type
             { frame_type::END_EFFECTOR_CLAW }
         );
     }
