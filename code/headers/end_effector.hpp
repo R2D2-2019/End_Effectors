@@ -10,7 +10,7 @@ namespace r2d2::end_effectors {
      */
     class end_effector_c {
     protected:
-        end_effector_type type;
+        //end_effector_type type;
     public:
         /**
          * This function can be used to reset the end effector to its default (starting) state
@@ -36,8 +36,8 @@ namespace r2d2::end_effectors {
          * 
          * @return the type of this end effector
          */
-        end_effector_type get_type() const {
-            return type;
-        }
+        //end_effector_type get_type() const {
+        //    return type;
+        //}
     };
 }

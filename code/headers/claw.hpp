@@ -6,56 +6,7 @@
 
 namespace r2d2::end_effectors {
     class claw_c : public end_effector_c {
-    public:
-        /**
-         * This is the constructor for the claw
-         * 
-         * @param pot_pin A hwlib adc pin to read the potmeter inside the servo of the claw default pin is a0
-         * 
-         * @param pwm_pin A r2d2 pwm lib pin used to send a pwm signal to the servo inside the claw default pin is 34
-         */
-        claw_c(hwlib::target::pin_adc pot_pin = hwlib::target::pin_adc(hwlib::target::ad_pins::a0),
-         r2d2::pwm_lib::pwm_c pwm_pin = r2d2::pwm_lib::pwm_c(0));
-         
-        /**
-         * This function is used to open the claw
-         */
-        void open_claw();
-
-        /**
-         * This function is used to close the claw in steps
-         * When something is stuck inside the claw the claw will stop closing
-         */
-        void close_claw();
-
-        /**
-         * This function resets the end effector to its default state
-         * For the claw this means opening the claw
-         */
-        void reset() override;
-        
-        /**
-         * This function is used to process incoming frames
-         * 
-         * @param comm The comm used by the module
-         */
-        void process(base_comm_c &comm) override;
-
-        /**
-         * This function is called on initialization and should be used to set which frames to listen to
-         * 
-         * @param comm The comm used by the module
-         */
-        void set_listen_frame_types(base_comm_c &comm) override;
-
     private:
-        /**
-         * This function calculates the difference between the current pot reading and what the pot reading should be
-         * 
-         * @param current_pwm The current pwm (duty cycle) is used to calculate what the current pot reading should be
-         */
-        int32_t calc_pot_difference(uint8_t current_pwm);
-
         /**
          * This is used to store the pot pin
          */
@@ -64,7 +15,7 @@ namespace r2d2::end_effectors {
         /**
          * This is used to store the pwm pin
          */
-        r2d2::pwm_lib::pwm_c pwm;
+        R2D2::pwm_lib::pwm_c pwm;
 
         /**
          * The offset that the lowest (open) reading has
@@ -89,6 +40,60 @@ namespace r2d2::end_effectors {
         /**
          * The pwm value (duty cycle) that corresponds to the claw being closed
          */
-        constexpr static uint8_t closed_pwm = 33;
+        constexpr static uint8_t closed_pwm = 34;
+        
+        /**
+         * This function calculates the difference between the current pot reading and what the pot reading should be
+         * 
+         * @param current_pwm The current pwm (duty cycle) is used to calculate what the current pot reading should be
+         */
+        int32_t calc_pot_difference(uint8_t current_pwm);
+    public:
+        /**
+         * This is the constructor for the claw
+         * 
+         * @param pot_pin A hwlib adc pin to read the potmeter inside the servo of the claw default pin is a0
+         * 
+         * @param pwm_pin A r2d2 pwm lib pin used to send a pwm signal to the servo inside the claw default pin is 34
+         */
+        claw_c(hwlib::target::pin_adc pot_pin = hwlib::target::pin_adc(hwlib::target::ad_pins::a0),
+         R2D2::pwm_lib::pwm_c pwm_pin = R2D2::pwm_lib::pwm_c(0));
+         
+        /**
+         * This function is used to open the claw
+         */
+        void open_claw();
+
+        /**
+         * This function is used to close the claw in steps
+         * When something is stuck inside the claw the claw will stop closing
+         */
+        void close_claw();
+
+        /**
+         * This function resets the end effector to its default state
+         * For the claw this means opening the claw
+         */
+        void reset() override;
+        /**
+         * This function makes controlling the claw through keyboard input possible
+         * with X and Y on the keyboard you can open and close the claw
+         */
+        void manual();
+        
+        /**
+         * This function is used to process incoming frames
+         * 
+         * @param comm The comm used by the module
+         */
+        void process(base_comm_c &comm) override;
+
+        /**
+         * This function is called on initialization and should be used to set which frames to listen to
+         * 
+         * @param comm The comm used by the module
+         */
+        void set_listen_frame_types(base_comm_c &comm) override;
+
     };
 }

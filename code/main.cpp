@@ -11,13 +11,15 @@ int main(void) {
     hwlib::wait_ms(1000);
 
     r2d2::comm_c comm;
+    
+    r2d2::end_effectors::claw_c c;
+    c.manual();
+    //auto end_effector = new r2d2::end_effectors::claw_c();
+    
+    //auto module = r2d2::end_effectors::module_c(comm, end_effector);
 
-    auto end_effector = new r2d2::end_effectors::claw_c();
-
-    auto module = r2d2::end_effectors::module_c(comm, end_effector);
-
-    for(;;) {
+    /*for(;;) {
         module.process();
         hwlib::wait_ms(100);
-    }
+    }*/
 }
