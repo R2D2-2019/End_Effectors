@@ -18,7 +18,7 @@ namespace r2d2::end_effectors {
         expected_pot = pot_per_pwm_step * (current_pwm-open_pwm) + pot_offset;
         for(uint8_t i = 0; i < pot_scans; i++) {
             pot_value += pot.read();
-            hwlib::wait_ms(1);
+            hwlib::busy_wait_ms(1);
         }
         pot_value /= pot_scans;
         difference = pot_value - expected_pot;
