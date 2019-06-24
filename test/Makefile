@@ -1,3 +1,4 @@
+
 #############################################################################
 #
 # Project Makefile
@@ -9,10 +10,10 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES := $(wildcard ../code/src/*.cpp)
+SOURCES := $(wildcard end_effectors/code/src/*.cpp)
 
 # header files in this project
-HEADERS := $(wildcard ../code/headers/*.hpp)
+HEADERS := $(wildcard end_effectors/code/headers/*.hpp)
 
 # other places to look for files for this project
 SEARCH  := ../code/headers ../code/src
@@ -21,4 +22,3 @@ SEARCH  := ../code/headers ../code/src
 # and defer to the Makefile.due there
 RELATIVE := $(RELATIVE)../
 include $(RELATIVE)Makefile.native
-
