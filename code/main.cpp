@@ -1,5 +1,6 @@
 #include "hwlib.hpp"
 #include <pwm.hpp>
+#include <claw.hpp>
 
 #include <comm.hpp>
 #include <module.hpp>
@@ -11,10 +12,11 @@ int main(void) {
 
     r2d2::comm_c comm;
 
-    //no access to any end effector yet, using nullptr for the time being
-    auto end_effector = nullptr;
+    auto pot_pin = hwlib::target::pin_adc(hwlib::target::ad_pins::a0);
 
-    auto module = r2d2::end_effectors::module_c(comm, end_effector);
+    auto end_effector = r2d2::end_effectors::claw_c(pot_pin);
+
+    auto module = r2d2::end_effectors::module_c(comm, &end_effector);
 
     for(;;) {
         module.process();
