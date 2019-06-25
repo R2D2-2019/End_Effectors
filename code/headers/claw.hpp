@@ -10,11 +10,11 @@ namespace r2d2::end_effectors {
         /**
          * This is the constructor for the claw
          * 
-         * @param pot_pin A hwlib adc pin to read the potmeter inside the servo of the claw default pin is a0
+         * @param pot_pin A hwlib adc pin to read the potmeter inside the servo of the claw
          * 
          * @param pwm_pin A r2d2 pwm lib pin used to send a pwm signal to the servo inside the claw default pin is 34
          */
-        claw_c(hwlib::target::pin_adc pot_pin = hwlib::target::pin_adc(hwlib::target::ad_pins::a0),
+        claw_c(hwlib::adc &pot_pin,
          r2d2::pwm_lib::pwm_c pwm_pin = r2d2::pwm_lib::pwm_c(0));
          
         /**
@@ -59,7 +59,7 @@ namespace r2d2::end_effectors {
         /**
          * This is used to store the pot pin
          */
-        hwlib::target::pin_adc pot;
+        hwlib::adc &pot;
 
         /**
          * This is used to store the pwm pin

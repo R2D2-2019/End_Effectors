@@ -12,7 +12,9 @@ int main(void) {
 
     r2d2::comm_c comm;
 
-    auto end_effector = r2d2::end_effectors::claw_c();
+    auto pot_pin = hwlib::target::pin_adc(hwlib::target::ad_pins::a0);
+
+    auto end_effector = r2d2::end_effectors::claw_c(pot_pin);
 
     auto module = r2d2::end_effectors::module_c(comm, &end_effector);
 
