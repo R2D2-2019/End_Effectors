@@ -1,7 +1,7 @@
 #include <claw.hpp>
 
 namespace r2d2::end_effectors {
-    claw_c::claw_c(hwlib::adc &pot_pin, r2d2::pwm_lib::pwm_c pwm_pin)
+    claw_c::claw_c(hwlib::adc &pot_pin, r2d2::pwm_lib::pwm_c &pwm_pin)
     : pot(pot_pin), pwm(pwm_pin) {
         type = end_effector_type::CLAW;
     }
@@ -10,12 +10,10 @@ namespace r2d2::end_effectors {
         pwm.set_duty_cycle(open_pwm);
     }
     
-    int32_t claw_c::calc_pot_difference(uint8_t current_pwm) {
-        uint32_t pot_value;
-        uint32_t expected_pot;
-        int32_t difference;
-        pot_value = 0;
-        expected_pot = pot_per_pwm_step * (current_pwm-open_pwm) + pot_offset;
+    int16_t claw_c::calc_pot_difference(uint8_t current_pwm) {
+        int16_t difference;        
+        uint32_t pot_value = 0;
+        uint16_t expected_pot = pot_per_pwm_step * (current_pwm-open_pwm) + pot_offset;
         for(uint8_t i = 0; i < pot_scans; i++) {
             pot_value += pot.read();
             hwlib::wait_ms_busy(1);

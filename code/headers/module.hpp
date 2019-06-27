@@ -12,7 +12,7 @@ namespace r2d2::end_effectors {
      */
     class module_c : public base_module_c {
     private:
-        end_effector_c *end_effector;
+        end_effector_c &end_effector;
     public:
         /**
          * The constructor initializes:
@@ -22,7 +22,7 @@ namespace r2d2::end_effectors {
          * @param comm 
          * @param end_effector
          */
-        module_c(base_comm_c &comm, end_effector_c *end_effector);
+        module_c(base_comm_c &comm, end_effector_c &end_effector);
     
         /**
          * Let the module process data.
