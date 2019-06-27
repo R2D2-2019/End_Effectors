@@ -17,7 +17,7 @@ int main(void) {
 
     auto end_effector = r2d2::end_effectors::claw_c(pot_pin, pwm_pin);
 
-    auto module = r2d2::end_effectors::module_c(comm, &end_effector);
+    auto module = r2d2::end_effectors::module_c(comm, end_effector);
 
     for(;;) {
         module.process();
