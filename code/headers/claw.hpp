@@ -62,7 +62,7 @@ namespace r2d2::end_effectors {
          * @param current_pwm The current pwm (duty cycle)
          * is used to calculate what the current pot reading should be
          */
-        int32_t calc_pot_difference(uint8_t current_pwm);
+        int16_t calc_pot_difference(uint8_t current_pwm);
 
         /**
          * This is used to store the pot pin
