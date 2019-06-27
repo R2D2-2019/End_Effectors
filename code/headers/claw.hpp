@@ -54,7 +54,10 @@ namespace r2d2::end_effectors {
     private:
         /**
          * This function calculates the difference between
-         *  the current pot reading and what the pot reading should be
+         * the current pot reading and what the pot reading should be
+         * This function waits for 50 ms
+         * The wait we use is a busy wait this means
+         * that we cant switch tasks during this wait
          * 
          * @param current_pwm The current pwm (duty cycle)
          * is used to calculate what the current pot reading should be
