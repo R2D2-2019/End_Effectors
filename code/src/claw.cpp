@@ -1,7 +1,7 @@
 #include <claw.hpp>
 
 namespace r2d2::end_effectors {
-    claw_c::claw_c(hwlib::adc &pot_pin, r2d2::pwm_lib::pwm_c pwm_pin)
+    claw_c::claw_c(hwlib::adc &pot_pin, r2d2::pwm_lib::pwm_c &pwm_pin)
     : pot(pot_pin), pwm(pwm_pin) {
         type = end_effector_type::CLAW;
     }

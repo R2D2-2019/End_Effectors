@@ -15,7 +15,7 @@ namespace r2d2::end_effectors {
          * @param pwm_pin A r2d2 pwm lib pin used to send a pwm signal to the servo inside the claw default pin is 34
          */
         claw_c(hwlib::adc &pot_pin,
-         r2d2::pwm_lib::pwm_c pwm_pin = r2d2::pwm_lib::pwm_c(0));
+         r2d2::pwm_lib::pwm_c &pwm_pin);
          
         /**
          * This function is used to open the claw
@@ -64,7 +64,7 @@ namespace r2d2::end_effectors {
         /**
          * This is used to store the pwm pin
          */
-        r2d2::pwm_lib::pwm_c pwm;
+        r2d2::pwm_lib::pwm_c &pwm;
 
         /**
          * The offset that the lowest (open) reading has
