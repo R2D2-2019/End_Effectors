@@ -14,10 +14,9 @@ namespace r2d2::end_effectors {
          * inside the servo of the claw
          * 
          * @param pwm_pin A r2d2 pwm lib pin used to send a pwm 
-         * signal to the servo inside the claw default pin is 34
+         * signal to the servo inside the claw
          */
-        claw_c(hwlib::adc &pot_pin,
-         r2d2::pwm_lib::pwm_c &pwm_pin);
+        claw_c(hwlib::adc &pot_pin, r2d2::pwm_lib::pwm_c &pwm_pin);
          
         /**
          * This function is used to open the claw
@@ -55,7 +54,8 @@ namespace r2d2::end_effectors {
         /**
          * This function calculates the difference between
          * the current pot reading and what the pot reading should be
-         * This function waits for 50 ms
+         * 
+         * @warning This function waits for 50 ms
          * The wait we use is a busy wait this means
          * that we cant switch tasks during this wait
          * 
@@ -99,5 +99,12 @@ namespace r2d2::end_effectors {
          * The pwm value (duty cycle) that corresponds to the claw being closed
          */
         constexpr static uint8_t closed_pwm = 33;
+
+        /**
+         * This is the value used to determine if there is collision
+         * If the current pot value is has a offset of more than 100 with the
+         * expected pot value, the claw will stop closing
+         */
+        constexpr static uint8_t grip_threshold = 100;
     };
 }
