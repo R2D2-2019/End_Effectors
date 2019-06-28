@@ -54,7 +54,8 @@ namespace r2d2::end_effectors {
         /**
          * This function calculates the difference between
          * the current pot reading and what the pot reading should be
-         * This function waits for 50 ms
+         * 
+         * @warning This function waits for 50 ms
          * The wait we use is a busy wait this means
          * that we cant switch tasks during this wait
          * 
