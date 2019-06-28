@@ -99,5 +99,12 @@ namespace r2d2::end_effectors {
          * The pwm value (duty cycle) that corresponds to the claw being closed
          */
         constexpr static uint8_t closed_pwm = 33;
+
+        /**
+         * This is the value used to determine if there is collision
+         * If the current pot value is has a offset of more than 100 with the
+         * expected pot value, the claw will stop closing
+         */
+        constexpr static uint8_t grip_threshold = 100;
     };
 }

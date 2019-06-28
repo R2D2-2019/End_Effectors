@@ -33,7 +33,7 @@ namespace r2d2::end_effectors {
                 pwm.set_duty_cycle(current_pwm);
                 hwlib::wait_ms(80);
                 difference = calc_pot_difference(current_pwm);
-                if(difference > 100 || difference < -100) {
+                if(difference > grip_threshold || difference < (-1 * grip_threshold)) {
                     collision = true;
                 }
             }
