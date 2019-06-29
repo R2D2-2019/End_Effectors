@@ -10,8 +10,7 @@ namespace r2d2::end_effectors {
         pwm.set_duty_cycle(open_pwm);
     }
     
-    int16_t claw_c::calc_pot_difference(uint8_t current_pwm) {
-        int16_t difference;        
+    int16_t claw_c::calc_pot_difference(uint8_t current_pwm) {      
         uint32_t pot_value = 0;
         uint16_t expected_pot = pot_per_pwm_step * (current_pwm-open_pwm) + pot_offset;
         for(uint8_t i = 0; i < pot_scans; i++) {
@@ -19,8 +18,7 @@ namespace r2d2::end_effectors {
             hwlib::wait_ms_busy(1);
         }
         pot_value /= pot_scans;
-        difference = pot_value - expected_pot;
-        return difference;
+        return pot_value - expected_pot;
     }
 
     void claw_c::close_claw() {
