@@ -1,23 +1,23 @@
 #pragma once
 
+#include <end_effector.hpp>
 #include <hwlib.hpp>
 #include <pwm.hpp>
-#include <end_effector.hpp>
 
 namespace r2d2::end_effectors {
     class claw_c : public end_effector_c {
     public:
         /**
          * This is the constructor for the claw
-         * 
-         * @param pot_pin A hwlib adc pin to read the potmeter 
+         *
+         * @param pot_pin A hwlib adc pin to read the potmeter
          * inside the servo of the claw
-         * 
-         * @param pwm_pin A r2d2 pwm lib pin used to send a pwm 
+         *
+         * @param pwm_pin A r2d2 pwm lib pin used to send a pwm
          * signal to the servo inside the claw
          */
         claw_c(hwlib::adc &pot_pin, r2d2::pwm_lib::pwm_c &pwm_pin);
-         
+
         /**
          * This function is used to open the claw
          */
@@ -34,18 +34,18 @@ namespace r2d2::end_effectors {
          * For the claw this means opening the claw
          */
         void reset() override;
-        
+
         /**
          * This function is used to process incoming frames
-         * 
+         *
          * @param comm The comm used by the module
          */
         void process(base_comm_c &comm) override;
 
         /**
-         * This function is called on initialization 
+         * This function is called on initialization
          * and should be used to set which frames to listen to
-         * 
+         *
          * @param comm The comm used by the module
          */
         void set_listen_frame_types(base_comm_c &comm) override;
@@ -54,11 +54,11 @@ namespace r2d2::end_effectors {
         /**
          * This function calculates the difference between
          * the current pot reading and what the pot reading should be
-         * 
+         *
          * @warning This function waits for 50 ms
          * The wait we use is a busy wait this means
          * that we cant switch tasks during this wait
-         * 
+         *
          * @param current_pwm The current pwm (duty cycle)
          * is used to calculate what the current pot reading should be
          */
@@ -107,4 +107,4 @@ namespace r2d2::end_effectors {
          */
         constexpr static uint8_t grip_threshold = 100;
     };
-}
+} // namespace r2d2::end_effectors

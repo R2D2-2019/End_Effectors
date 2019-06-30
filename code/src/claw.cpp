@@ -2,25 +2,24 @@
 
 namespace r2d2::end_effectors {
     claw_c::claw_c(hwlib::adc &pot_pin, r2d2::pwm_lib::pwm_c &pwm_pin)
-    : pot(pot_pin), pwm(pwm_pin) {
+        : pot(pot_pin), pwm(pwm_pin) {
         type = end_effector_type::CLAW;
     }
-    
+
     void claw_c::open_claw() {
         pwm.set_duty_cycle(open_pwm);
     }
-    
+
     int16_t claw_c::calc_pot_difference(uint8_t current_pwm) {
-        int16_t difference;        
         uint32_t pot_value = 0;
-        uint16_t expected_pot = pot_per_pwm_step * (current_pwm-open_pwm) + pot_offset;
-        for(uint8_t i = 0; i < pot_scans; i++) {
+        uint16_t expected_pot =
+            pot_per_pwm_step * (current_pwm - open_pwm) + pot_offset;
+        for (uint8_t i = 0; i < pot_scans; i++) {
             pot_value += pot.read();
             hwlib::wait_ms_busy(1);
         }
         pot_value /= pot_scans;
-        difference = pot_value - expected_pot;
-        return difference;
+        return pot_value - expected_pot;
     }
 
     void claw_c::close_claw() {
@@ -28,12 +27,14 @@ namespace r2d2::end_effectors {
         int32_t difference;
         open_claw();
         hwlib::wait_ms(1000);
-        for(uint8_t current_pwm = open_pwm; current_pwm <= closed_pwm; current_pwm++) {
-            if(!collision) {
+        for (uint8_t current_pwm = open_pwm; current_pwm <= closed_pwm;
+             current_pwm++) {
+            if (!collision) {
                 pwm.set_duty_cycle(current_pwm);
                 hwlib::wait_ms(80);
                 difference = calc_pot_difference(current_pwm);
-                if(difference > grip_threshold || difference < (-1 * grip_threshold)) {
+                if (difference > grip_threshold ||
+                    difference < (-1 * grip_threshold)) {
                     collision = true;
                 }
             }
@@ -58,9 +59,8 @@ namespace r2d2::end_effectors {
                 continue;
             }
 
-            const auto close = frame.as_frame_type<
-                frame_type::END_EFFECTOR_CLAW
-            >().close;
+            const auto close =
+                frame.as_frame_type<frame_type::END_EFFECTOR_CLAW>().close;
 
             if (close) {
                 close_claw();
@@ -71,8 +71,6 @@ namespace r2d2::end_effectors {
     }
 
     void claw_c::set_listen_frame_types(base_comm_c &comm) {
-        comm.listen_for_frames(
-            { frame_type::END_EFFECTOR_CLAW }
-        );
+        comm.listen_for_frames({frame_type::END_EFFECTOR_CLAW});
     }
-}
+} // namespace r2d2::end_effectors

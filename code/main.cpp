@@ -1,6 +1,6 @@
+#include <claw.hpp>
 #include <hwlib.hpp>
 #include <pwm.hpp>
-#include <claw.hpp>
 
 #include <comm.hpp>
 #include <module.hpp>
@@ -19,7 +19,7 @@ int main(void) {
 
     auto module = r2d2::end_effectors::module_c(comm, end_effector);
 
-    for(;;) {
+    for (;;) {
         module.process();
         hwlib::wait_ms(100);
     }
